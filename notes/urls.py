@@ -21,4 +21,5 @@ urlpatterns=patterns('',
 		 ),
 		(r'^note/(?P<slug>[-\w]+)/ajax_update/$','notes.views.ajax_update_note'
 		 ),
+		(r'^slug_available/$','notes.views.slug_available'),
 		)

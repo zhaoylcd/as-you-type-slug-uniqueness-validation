@@ -7,6 +7,18 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 @login_required
+def slug_available(request):
+	if request.method == "GET":
+		get=request.GET.copy()
+		if get.has_key('slug'):
+			slug_str=get['slug']
+			if Note.objects.filter(slug=slug_str).count() == 0:
+				return HttpResponse(slug_str)
+			else:
+				return HttpResponseServerError(slug_str)
+	return HttpResponseServerError("Requires a slug field.")
+
+@login_required
 def ajax_create_note(request):
 	success=False
 	to_return={'msg':u'No Post data sent.'}

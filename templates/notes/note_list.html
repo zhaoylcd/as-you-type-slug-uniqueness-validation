@@ -50,6 +50,20 @@
  };
 
  $("#create").click(create_note);
+ $("#slug").keyup(function(){
+	var slug=this.value
+        var complete=function(res,status)
+	{
+		if (status=="success"){ 
+		$("#slug").css('background-color','blue');
+		}
+		else{
+		$("#slug").css('background-color','red');
+		}
+		
+	}
+	$.ajax({type:'GET',url:'/slug_available/',data:{'slug':slug},complete:complete});
+});
 </script>
 {% endif %}
 {% endblock %}
